@@ -36,8 +36,7 @@ move_app_to_nativfier_app_directory() {
 
 
 make_config() {
-	echo -n "
-[Desktop Entry]
+	echo -n "[Desktop Entry]
 Type=Application
 Exec=${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}/${APP_NAME}
 Terminal=false
