@@ -2,21 +2,16 @@
 
 Simple script shell to download websites as desktop apps.
 
-
 <br>
-<h3>Requirements:</h3>
 
----
+<h4>Requirements:</h4>
 
 - `nativefier`
 
 <br>
 
 
-<h3>Usage:</h3>
-
----
-
+<h2>Usage:</h2>
 
 To use the script, clone it, then run the `.sh` file:
 ```sh
