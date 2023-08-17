@@ -2,6 +2,7 @@
 
 # You can modify this
 NATIVEFIER_APPS_DIRECTORY="${HOME}/.nativefier-apps"
+LOG_FILE="/tmp/wa2da.log"
 
 # ------- #
 
@@ -22,7 +23,10 @@ Use: ${0} <app_name> <website_url>
 
 
 create_app() {
-	nativefier --name "${APP_NAME}" "${WEBSITE_URL}" 0>/tmp/make-webapp.log 1>/tmp/make-webapp.log 2>/tmp/make-webapp.log || exit 1
+	nativefier --name "${APP_NAME}" "${WEBSITE_URL}" \
+		0>"${LOG_FILE}" \
+		1>"${LOG_FILE}" \
+		2>"${LOG_FILE}" || exit 1
 }
 
 
@@ -36,7 +40,6 @@ make_config() {
 [Desktop Entry]
 Type=Application
 Exec=${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}/${APP_NAME}
-# Icon=Alacritty
 Terminal=false
 
 Name=${APP_NAME}
