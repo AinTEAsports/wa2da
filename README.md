@@ -3,7 +3,6 @@
 "Web App to Desktop App" (aka `wa2da`) is a simple script shell to download websites as desktop apps.
 
 <br>
-
 <h4>Requirements:</h4>
 
 - `nativefier`
