@@ -1,6 +1,6 @@
 # wa2da
 
-Simple script shell to download websites as desktop apps.
+"Web App to Desktop App" (aka `wa2da`) is a simple script shell to download websites as desktop apps.
 
 <br>
 
