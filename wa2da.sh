@@ -8,8 +8,9 @@ LOG_FILE="/tmp/wa2da.log"
 
 APP_NAME="${1}"
 WEBSITE_URL="${2}"
-APP_ICON="${3}"
 APP_DIRECTORY="${APP_NAME}-linux-x64"
+
+APP_ICON_DESTINATION="${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}/icon.ico"
 
 DESKTOP_FILENAME=$(echo "${APP_NAME}.desktop" | tr '[:upper:]' '[:lower:]')
 ABSOLUTE_DESKTOP_FILE_PATH="${HOME}/.local/share/applications/${DESKTOP_FILENAME}"
@@ -17,7 +18,7 @@ ABSOLUTE_DESKTOP_FILE_PATH="${HOME}/.local/share/applications/${DESKTOP_FILENAME
 
 show_help() {
 	echo "\
-Use: ${0} <app_name> <website_url> [path_to_icon_app]
+Use: ${0} <app_name> <website_url>
 \"Downloads\" a website into a desktop app, using \"nativefier\". \
 "
 }
@@ -50,7 +51,7 @@ StartupWMClass=${APP_NAME}
 Actions=New;
 
 [Desktop Action New]
-Name={APP_NAME}
+Name=${APP_NAME}
 Exec=${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}/${APP_NAME}
 "
 }
