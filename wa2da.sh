@@ -8,6 +8,7 @@ LOG_FILE="/tmp/wa2da.log"
 
 APP_NAME="${1}"
 WEBSITE_URL="${2}"
+APP_ICON="${3}"
 APP_DIRECTORY="${APP_NAME}-linux-x64"
 
 DESKTOP_FILENAME=$(echo "${APP_NAME}.desktop" | tr '[:upper:]' '[:lower:]')
@@ -16,8 +17,8 @@ ABSOLUTE_DESKTOP_FILE_PATH="${HOME}/.local/share/applications/${DESKTOP_FILENAME
 
 show_help() {
 	echo "\
-Use: ${0} <app_name> <website_url>
-\"Downloads\" a website into a desktop app, using \"nativefier\"\
+Use: ${0} <app_name> <website_url> [path_to_icon_app]
+\"Downloads\" a website into a desktop app, using \"nativefier\". \
 "
 }
 
@@ -39,6 +40,7 @@ make_config() {
 	echo -n "[Desktop Entry]
 Type=Application
 Exec=${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}/${APP_NAME}
+Icon=${APP_ICON}
 Terminal=false
 
 Name=${APP_NAME}
@@ -69,8 +71,8 @@ main() {
 		exit 1
 	fi
 
-	# Check if argument number is good
-	if [[ "$#" -ne 2 ]]; then
+	# Check if argument number is good (2 or 3)
+	if [[ "$#" -ne 2 && "$#" -ne 3 ]]; then
 		show_help
 		exit 1
 	fi
@@ -84,6 +86,13 @@ main() {
 	# Check if ".desktop" file already exists
 	if [[ -f "${ABSOLUTE_DESKTOP_FILE_PATH}" ]]; then
 		>&2 echo "[ERROR] '${ABSOLUTE_DESKTOP_FILE_PATH}' already exists"
+		exit 1
+	fi
+
+
+	# Check if the URL is valid
+	if curl --output /dev/null --silent --fail -r 0-0 "${WEBSITE_URL}"; then
+		>&2 echo "[ERROR] '${WEBSITE_URL}' does not exist"
 		exit 1
 	fi
 
