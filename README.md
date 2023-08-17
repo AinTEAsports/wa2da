@@ -22,9 +22,9 @@ chmod +x ./wa2da.sh
 <br></br>
 Then you can run the script, like this:
 ```sh
-./wa2da.sh <app_name> <website_url> [path_to_icon_app]
+./wa2da.sh <app_name> <website_url>
 ```
-Where `<app_name>` is the name you want to give the app, where `<website_url>` is the website URL you want to "download" and where `[path_to_icon_app]` is optionnal (defaults to nothing) and is the path to the icon you want to use for this app.
+Where `<app_name>` is the name you want to give the app and where `<website_url>` is the website URL you want to "download".
 
 <br>
 
