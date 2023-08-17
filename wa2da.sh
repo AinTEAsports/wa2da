@@ -11,7 +11,7 @@ WEBSITE_URL="${2}"
 APP_DIRECTORY="${APP_NAME}-linux-x64"
 
 DESKTOP_FILENAME=$(echo "${APP_NAME}.desktop" | tr '[:upper:]' '[:lower:]')
-ABSOLUTE_FILENAME="${HOME}/.local/share/applications/${DESKTOP_FILENAME}"
+ABSOLUTE_DESKTOP_FILE_PATH="${HOME}/.local/share/applications/${DESKTOP_FILENAME}"
 
 
 show_help() {
@@ -56,28 +56,35 @@ Exec=${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}/${APP_NAME}
 
 
 make_desktop_file() {
-	make_config > "${ABSOLUTE_FILENAME}"
+	make_config > "${ABSOLUTE_DESKTOP_FILE_PATH}"
 }
 
 
 main() {
+	# Create '$NATIVEFIER_APPS_DIRECTORY' if it doesn't exist
+	[[ -e "${NATIVEFIER_APPS_DIRECTORY}" ]] || mkdir -p "${NATIVEFIER_APPS_DIRECTORY}"
+
+	# Check if the command 'nativefier' exists
 	if [[ -z $(command -v nativefier) ]]; then
 		echo "'nativefier' could not be found, please install it"
 		exit 1
 	fi
 
+	# Check if argument number is good
 	if [[ "$#" -ne 2 ]]; then
 		show_help
 		exit 1
 	fi
 
+	# Check if destination directory already exists
 	if [[ -d "${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}" ]]; then
 		>&2 echo "[ERROR] Application '${APP_NAME}' already exists"
 		exit 1
 	fi
 
-	if [[ -f "${ABSOLUTE_FILENAME}" ]]; then
-		>&2 echo "[ERROR] '${ABSOLUTE_FILENAME}' already exists"
+	# Check if ".desktop" file already exists
+	if [[ -f "${ABSOLUTE_DESKTOP_FILE_PATH}" ]]; then
+		>&2 echo "[ERROR] '${ABSOLUTE_DESKTOP_FILE_PATH}' already exists"
 		exit 1
 	fi
 
