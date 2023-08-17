@@ -10,6 +10,9 @@ APP_NAME="${1}"
 WEBSITE_URL="${2}"
 APP_DIRECTORY="${APP_NAME}-linux-x64"
 
+# This is temporary until I find a way to get the website logo (you can find it by doing 'https://<website_name>/favicon.ico' on most websites)
+APP_ICON="${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}/resources/app/icon.png"
+
 APP_ICON_DESTINATION="${NATIVEFIER_APPS_DIRECTORY}/${APP_DIRECTORY}/icon.ico"
 
 DESKTOP_FILENAME=$(echo "${APP_NAME}.desktop" | tr '[:upper:]' '[:lower:]')
@@ -92,7 +95,7 @@ main() {
 
 
 	# Check if the URL is valid
-	if curl --output /dev/null --silent --fail -r 0-0 "${WEBSITE_URL}"; then
+	if ! curl --output /dev/null --silent --fail -r 0-0 "${WEBSITE_URL}"; then
 		>&2 echo "[ERROR] '${WEBSITE_URL}' does not exist"
 		exit 1
 	fi
