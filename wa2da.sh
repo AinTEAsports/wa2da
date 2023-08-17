@@ -94,6 +94,13 @@ main() {
 	fi
 
 
+	# Checks if there is a space in '${APP_NAME}'
+	if [[ "${APP_NAME}" =~ ( |\') ]]; then
+		>&2 echo "[ERROR] Please do not use a space in the app name"
+		exit 1
+	fi
+
+
 	# Check if the URL is valid
 	if ! curl --output /dev/null --silent --fail -r 0-0 "${WEBSITE_URL}"; then
 		>&2 echo "[ERROR] '${WEBSITE_URL}' does not exist"
