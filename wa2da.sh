@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
-# You can modify this
-NATIVEFIER_APPS_DIRECTORY="${HOME}/.nativefier-apps"
+# You can modify line 6 and 8
+[[ -n $NATIVEFIER_APPS_DIRECTORY ]] \
+	&& NATIVEFIER_APPS_DIRECTORY=$NATIVEFIER_APPS_DIRECTORY \
+	|| NATIVEFIER_APPS_DIRECTORY="${HOME}/.nativefier-apps"
+
 LOG_FILE="/tmp/wa2da.log"
 
 # ------- #
